@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/client';
 import { QUERY_CATEGORIES } from '../../utils/queries';
 import { useStoreContext } from "../../utils/GlobalState";
 
-function CategoryMenu({ }) {
+function CategoryMenu() {
   const [state, dispatch] = useStoreContext();
 
   const { categories } = state;
@@ -15,12 +15,7 @@ function CategoryMenu({ }) {
 
     // if categoryData exists or has changed from the response of useQuery, then run dispatch()
 
-    const handleClick = id => {
-      dispatch({
-        type: UPDATE_CURRENT_CATEGORY,
-        currentCategory: id
-      });
-    };
+    
     if (categoryData) {
       // execute our dispatch function with our action object indicating the type of action and the data to set our state for categories to
       dispatch({
@@ -30,6 +25,12 @@ function CategoryMenu({ }) {
     }
   }, [categoryData, dispatch]);
 
+  const handleClick = id => {
+    dispatch({
+      type: UPDATE_CURRENT_CATEGORY,
+      currentCategory: id
+    });
+  };
   return (
     <div>
       <h2>Choose a Category:</h2>
